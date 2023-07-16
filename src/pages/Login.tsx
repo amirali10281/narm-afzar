@@ -90,15 +90,20 @@ function Login() {
   const navigate = useNavigate();
 
   const login = () => {
-    axiosInstance.post("/api/human-resource/user/login", { username, password }).then((res) => {
-      let data = res.data
-      localStorage.setItem("token", data)
-    }).then(() => { navigate(PATH_DASHBOARD.user) })
+    axiosInstance
+      .post("/api/human-resource/user/login", { username, password })
+      .then((res) => {
+        let data = res.data;
+        localStorage.setItem("token", data);
+      })
+      .then(() => {
+        navigate(PATH_DASHBOARD.user);
+      });
   };
 
   useEffect(() => {
-    localStorage.removeItem("dental-token");
-  });
+    localStorage.removeItem("token");
+  }, []);
 
   return (
     <Page>

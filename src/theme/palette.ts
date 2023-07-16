@@ -28,9 +28,9 @@ export const GREY = {
 };
 
 export const PRIMARY = {
-  light: "#FEBA4D",
-  main: "#F05123",
-  dark: "#C32C00",
+  light: GREY[100],
+  main: GREY[200],
+  dark: GREY[300],
   contrastText: "#3C2517",
 };
 
