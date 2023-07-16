@@ -5,9 +5,10 @@ import {
   fullSizeStyle,
 } from "../components/styles/BaseComponents";
 import { styled } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PATH_DASHBOARD } from "../routes/paths";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../api/APIClient";
 
 interface EnterCardInfoProps {
   enter?: boolean;
@@ -120,6 +121,12 @@ const UserPage = () => {
     total_hours_worked: 0,
     feedbacks: [],
   });
+
+  useEffect(() => {
+    axiosInstance.get(("/api/human-resource/employees/me")).then((res) => {
+      setData(res.data)
+    })
+  })
   const navigate = useNavigate();
   return (
     <Wrapper>

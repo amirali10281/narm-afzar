@@ -6,8 +6,11 @@ const axiosInstance = axios.create({
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
+    Authorization: localStorage.getItem("token")
   },
 });
+
+axiosInstance.defaults.baseURL = "http://localhost:8000"
 
 axiosInstance.interceptors.response.use(
   (response) => response,

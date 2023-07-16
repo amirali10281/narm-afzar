@@ -10,6 +10,7 @@ import {
 import { PATH_DASHBOARD } from "../routes/paths";
 import BaseInput from "../components/BaseInput";
 import BaseButton from "../components/BaseButton";
+import axiosInstance from "../api/APIClient";
 
 const Page = styled(Box)(() => ({
   height: "100vh",
@@ -89,10 +90,10 @@ function Login() {
   const navigate = useNavigate();
 
   const login = () => {
-    if (username === "amirali" && password === "alireza") {
-      navigate(PATH_DASHBOARD.user);
-      localStorage.setItem("dental-token", "somethingJustFun");
-    }
+    axiosInstance.post("/api/human-resource/user/login", { username, password }).then((res) => {
+      let data = res.data
+      localStorage.setItem("token", data)
+    }).then(() => { navigate(PATH_DASHBOARD.user) })
   };
 
   useEffect(() => {
