@@ -126,7 +126,7 @@ const UserPage = () => {
     axiosInstance.get(("/api/human-resource/employees/me")).then((res) => {
       setData(res.data)
     })
-  })
+  }, [])
   const navigate = useNavigate();
   return (
     <Wrapper>

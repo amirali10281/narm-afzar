@@ -14,6 +14,7 @@ import { QrReader } from "react-qr-reader";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PATH_DASHBOARD } from "../routes/paths";
+import axiosInstance from "../api/APIClient";
 
 const Wrapper = styled(Box)(() => ({
   ...fullScreenStyle,
@@ -34,16 +35,28 @@ const LoginButton = styled(Button)(({ theme }) => ({
 function SplashPage() {
   const [data, setData] = useState("");
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const theme = useTheme();
 
-  const request = () => {
-    if (!status) {
-      setStatus("success");
-      setTimeout(() => {
-        setStatus("");
-        setData("");
-      }, 2000);
+  const request = (res: string) => {
+    if (!data && !status && !loading) {
+      setLoading(true)
+      setData(res);
+      axiosInstance.post("/api/human-resource/employees/TimeTrack/checkout", { "personal_id": res }).then((res) => {
+        setStatus("success")
+      }).catch((e) => {
+        setStatus("error")
+      }).finally(() => {
+        setTimeout(() => {
+          setStatus("")
+          setData("")
+          setLoading(false)
+        }, 5000);
+      })
     }
+
+
   };
   const navigate = useNavigate();
   return (
@@ -53,10 +66,10 @@ function SplashPage() {
           status === "success"
             ? theme.palette.success.dark
             : status === "error"
-            ? theme.palette.error.dark
-            : data
-            ? theme.palette.info.light
-            : theme.palette.grey[900],
+              ? theme.palette.error.dark
+              : data
+                ? theme.palette.info.light
+                : theme.palette.grey[900],
       }}
     >
       <LoginButton
@@ -86,10 +99,9 @@ function SplashPage() {
           constraints={{ facingMode: "user" }}
           onResult={(result, error) => {
             if (!!result) {
-              setData(result?.getText());
-              setTimeout(() => {
-                request();
-              }, 1000);
+              if (!data && !status && !loading) {
+                request(result?.getText());
+              }
             }
 
             if (!!error) {
@@ -104,20 +116,20 @@ function SplashPage() {
             status === "success"
               ? theme.palette.success.light
               : status === "error"
-              ? theme.palette.error.light
-              : data
-              ? theme.palette.info.light
-              : theme.palette.grey[300]
+                ? theme.palette.error.light
+                : data
+                  ? theme.palette.info.light
+                  : theme.palette.grey[300]
           }
           textAlign="center"
         >
           {status === "success"
             ? `welcome ${new Date().getHours()}:${new Date().getMinutes()}`
             : status === "error"
-            ? `error ${new Date().getHours()}:${new Date().getMinutes()}`
-            : !data
-            ? "scan your card"
-            : data}
+              ? `error ${new Date().getHours()}:${new Date().getMinutes()}`
+              : !data
+                ? "scan your card"
+                : data}
         </Typography>
       </Stack>
     </Wrapper>
