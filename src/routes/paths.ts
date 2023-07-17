@@ -10,4 +10,6 @@ export const PATH_DASHBOARD = {
   checkout: path(ROOTS_DASHBOARD, "checkout"),
   user: path(ROOTS_DASHBOARD, "user"),
   messages: path(ROOTS_DASHBOARD, "messages"),
+  about: path(ROOTS_DASHBOARD, "about"),
+
 };

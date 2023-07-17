@@ -6,6 +6,8 @@ import {
   styled,
   Dialog as MUIDialog,
   Stack,
+  Button,
+  useTheme,
 } from "@mui/material";
 import { PATH_DASHBOARD } from "../routes/paths";
 import BaseInput from "../components/BaseInput";
@@ -41,6 +43,8 @@ const Dialog = styled(MUIDialog)(({ theme, maxWidth }) => ({
     backgroundImage: "none",
   },
 }));
+
+
 
 const DialogContent = styled(Box)(() => ({
   display: "grid",
@@ -107,9 +111,10 @@ function Login() {
   useEffect(() => {
     localStorage.removeItem("token");
   }, []);
-
+  const theme = useTheme()
   return (
     <Page>
+
       <Dialog
         fullWidth
         maxWidth="lg"
@@ -154,6 +159,7 @@ function Login() {
               </Stack>
             </Stack>
             <Stack
+              spacing={2}
               sx={{
                 position: "absolute",
                 bottom: "68px",
@@ -162,17 +168,26 @@ function Login() {
               }}
             >
               <BaseButton
+
                 onClick={() => login()}
                 disabled={username === "" || password === ""}
               >
-                <Typography variant="subtitle2">ورود</Typography>
+                <Typography variant="subtitle2">Login</Typography>
               </BaseButton>
+              <BaseButton
+                onClick={() => {
+                  navigate(PATH_DASHBOARD.checkout)
+                }}
+              >
+                <Typography variant="subtitle2">Back</Typography>
+              </BaseButton>
+
             </Stack>
           </FieldsSide>
           <ContentSide />
         </DialogContent>
       </Dialog>
-    </Page>
+    </Page >
   );
 }
 

@@ -29,6 +29,9 @@ const UserPage = Loadable(lazy(() => import("../pages/UserPage")));
 
 const Messages = Loadable(lazy(() => import("../pages/Messages")));
 
+const About = Loadable(lazy(() => import("../pages/About")));
+
+
 export default function Router() {
   return (
     <Routes>
@@ -37,9 +40,12 @@ export default function Router() {
           path={PATH_DASHBOARD.root}
           element={<Navigate to={PATH_DASHBOARD.checkout} />}
         />
+
       </Route>
       <Route>
         <Route path={PATH_DASHBOARD.checkout} element={<Splash />} />
+        <Route path={PATH_DASHBOARD.about} element={<About />} />
+
         <Route
           path={PATH_DASHBOARD.login}
           element={

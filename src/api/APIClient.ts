@@ -6,11 +6,11 @@ const axiosInstance = axios.create({
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    
+
   },
 });
 
-axiosInstance.defaults.baseURL = "http://localhost:8000"
+axiosInstance.defaults.baseURL = "https://hrm-api.amirentezari.ir"
 
 axiosInstance.interceptors.response.use(
   (response) => response,

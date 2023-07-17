@@ -31,7 +31,21 @@ const LoginButton = styled(Button)(({ theme }) => ({
   right: "30px",
   color: theme.palette.common.white,
 }));
+const DirectionButton = styled(Button)(({ theme }) => ({
+  position: "absolute",
+  backgroundColor: theme.palette.grey[800],
+  width: "100px",
+  left: "calc(50% - 50px)",
+  right: "calc(50% - 50px)",
+  bottom: '30px',
+  migration: "auto",
+  color: theme.palette.grey[100],
+  "&:hover": {
+    color: theme.palette.grey[900],
+    backgroundColor: theme.palette.grey[300],
 
+  },
+}));
 function SplashPage() {
   const [data, setData] = useState("");
   const [status, setStatus] = useState("");
@@ -70,10 +84,10 @@ function SplashPage() {
           status === "success"
             ? theme.palette.success.dark
             : status === "error"
-            ? theme.palette.error.dark
-            : data
-            ? theme.palette.info.light
-            : theme.palette.grey[900],
+              ? theme.palette.error.dark
+              : data
+                ? theme.palette.info.light
+                : theme.palette.grey[900],
       }}
     >
       <LoginButton
@@ -120,22 +134,25 @@ function SplashPage() {
             status === "success"
               ? theme.palette.success.light
               : status === "error"
-              ? theme.palette.error.light
-              : data
-              ? theme.palette.info.light
-              : theme.palette.grey[300]
+                ? theme.palette.error.light
+                : data
+                  ? theme.palette.info.light
+                  : theme.palette.grey[300]
           }
           textAlign="center"
         >
           {status === "success"
             ? `success ${new Date().getHours()}:${new Date().getMinutes()}`
             : status === "error"
-            ? `error ${new Date().getHours()}:${new Date().getMinutes()}`
-            : !data
-            ? "scan your card"
-            : data}
+              ? `error ${new Date().getHours()}:${new Date().getMinutes()}`
+              : !data
+                ? "scan your card"
+                : data}
         </Typography>
       </Stack>
+      <DirectionButton onClick={() => { navigate(PATH_DASHBOARD.about) }}>
+        <Typography variant="buttonLarge" fontWeight="bold">About Us</Typography>
+      </DirectionButton>
     </Wrapper>
   );
 }
