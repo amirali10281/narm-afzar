@@ -97,7 +97,10 @@ function Login() {
         localStorage.setItem("token", data);
       })
       .then(() => {
-        navigate(PATH_DASHBOARD.user);
+        setTimeout(() => {
+          navigate(PATH_DASHBOARD.user);
+
+        }, 500);
       });
   };
 

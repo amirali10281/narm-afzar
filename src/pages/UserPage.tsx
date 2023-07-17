@@ -149,7 +149,14 @@ const UserPage = () => {
 
   useEffect(() => {
     axiosInstance
-      .get("/api/human-resource/employees/me")
+      .get("/api/human-resource/employees/me", {
+        withCredentials: true,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token")
+        },
+      })
       .then((res) => {
         setData(res.data);
       })
@@ -163,6 +170,13 @@ const UserPage = () => {
       .post("/api/human-resource/feedback/send", {
         to_user_id: id,
         message: text,
+      }, {
+        withCredentials: true,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token")
+        },
       })
       .then(() => {
         setText("");
