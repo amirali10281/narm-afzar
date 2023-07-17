@@ -41,22 +41,26 @@ function SplashPage() {
 
   const request = (res: string) => {
     if (!data && !status && !loading) {
-      setLoading(true)
+      setLoading(true);
       setData(res);
-      axiosInstance.post("/api/human-resource/employees/TimeTrack/checkout", { "personal_id": res }).then((res) => {
-        setStatus("success")
-      }).catch((e) => {
-        setStatus("error")
-      }).finally(() => {
-        setTimeout(() => {
-          setStatus("")
-          setData("")
-          setLoading(false)
-        }, 5000);
-      })
+      axiosInstance
+        .post("/api/human-resource/employees/TimeTrack/checkout", {
+          personal_id: res,
+        })
+        .then((res) => {
+          setStatus("success");
+        })
+        .catch((e) => {
+          setStatus("error");
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setStatus("");
+            setData("");
+            setLoading(false);
+          }, 5000);
+        });
     }
-
-
   };
   const navigate = useNavigate();
   return (
@@ -66,10 +70,10 @@ function SplashPage() {
           status === "success"
             ? theme.palette.success.dark
             : status === "error"
-              ? theme.palette.error.dark
-              : data
-                ? theme.palette.info.light
-                : theme.palette.grey[900],
+            ? theme.palette.error.dark
+            : data
+            ? theme.palette.info.light
+            : theme.palette.grey[900],
       }}
     >
       <LoginButton
@@ -116,20 +120,20 @@ function SplashPage() {
             status === "success"
               ? theme.palette.success.light
               : status === "error"
-                ? theme.palette.error.light
-                : data
-                  ? theme.palette.info.light
-                  : theme.palette.grey[300]
+              ? theme.palette.error.light
+              : data
+              ? theme.palette.info.light
+              : theme.palette.grey[300]
           }
           textAlign="center"
         >
           {status === "success"
-            ? `welcome ${new Date().getHours()}:${new Date().getMinutes()}`
+            ? `success ${new Date().getHours()}:${new Date().getMinutes()}`
             : status === "error"
-              ? `error ${new Date().getHours()}:${new Date().getMinutes()}`
-              : !data
-                ? "scan your card"
-                : data}
+            ? `error ${new Date().getHours()}:${new Date().getMinutes()}`
+            : !data
+            ? "scan your card"
+            : data}
         </Typography>
       </Stack>
     </Wrapper>

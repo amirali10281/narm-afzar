@@ -61,27 +61,6 @@ const CardInfoBase = styled(Box)(({ theme }) => ({
   padding: theme.spacing(4),
 }));
 
-const EnterCardInfo = styled(Box)<EnterCardInfoProps>(({ theme, enter }) => ({
-  width: "100%",
-  display: "flex",
-  justifyContent: "center",
-  borderRadius: theme.spacing(1),
-  backgroundColor: enter
-    ? theme.palette.success.main
-    : theme.palette.error.main,
-  padding: theme.spacing(1),
-}));
-
-const EnterCardInfoWorkHours = styled(Box)<EnterCardInfoProps>(
-  ({ theme, enter }) => ({
-    display: "flex",
-    justifyContent: "center",
-    width: "100%",
-    borderRadius: theme.spacing(1),
-    backgroundColor: theme.palette.grey[900],
-    padding: theme.spacing(1),
-  })
-);
 const StartCardInfo = styled(Box)<EnterCardInfoProps>(({ theme, enter }) => ({
   display: "flex",
   justifyContent: "center",
@@ -96,6 +75,7 @@ const LoginButton = styled(Button)(({ theme }) => ({
   right: "30px",
   color: theme.palette.common.white,
 }));
+
 const DirectionButton = styled(Button)(({ theme }) => ({
   position: "absolute",
   backgroundColor: theme.palette.grey[800],
@@ -109,7 +89,7 @@ const DirectionButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const UserPage = () => {
+const Messages = () => {
   const [text, setText] = useState("");
   const [id, setId] = useState("");
   const [data, setData] = useState({
@@ -187,7 +167,6 @@ const UserPage = () => {
             display: "flex",
             justifyContent: "space-between",
             position: "relative",
-            width: "100%",
           }}
           p={2}
         >
@@ -197,82 +176,73 @@ const UserPage = () => {
           <DirectionButton
             variant="contained"
             onClick={() => {
-              navigate(PATH_DASHBOARD.messages);
+              navigate(PATH_DASHBOARD.user);
             }}
           >
-            your feedbacks
+            your profile
           </DirectionButton>
           <Typography variant="h5" color={"gray"}>
             {data.personal_id}
           </Typography>
         </Box>
         <Stack spacing={2}>
-          <CardInfo
-            sx={{ maxHeight: "500px", overflow: "auto", margin: "0px" }}
-          >
-            <Stack gap={1} maxHeight="400px" overflow="auto">
-              <StartCardInfo mb={2}>
-                <Typography variant="h4" fontWeight="bold" textAlign="center">
-                  enter and exit time
-                </Typography>
-              </StartCardInfo>
-              {data.time_track.map((item) => (
-                <EnterCardInfo enter={item.checkout_type === "E"}>
-                  <Typography
-                    variant="buttonLarge"
-                    fontWeight="bold"
-                    textAlign="center"
-                  >
-                    {new Date(item.checkout_time).getFullYear().toString()} /
-                    {new Date(item.checkout_time).getMonth() + 1 + ""} /
-                    {new Date(item.checkout_time).getDate().toString()} -
-                    {new Date(item.checkout_time).getHours().toString()}:
-                    {new Date(item.checkout_time).getMinutes().toString()}
-                  </Typography>
-                </EnterCardInfo>
-              ))}
-            </Stack>
-            <Stack gap={1} maxHeight="100%" overflow="auto">
-              <StartCardInfo mb={2}>
-                <Typography variant="h4" fontWeight="bold" textAlign="center">
-                  total work hours
-                </Typography>
-              </StartCardInfo>
-              {data.work_hours.map((item) => (
-                <EnterCardInfoWorkHours>
-                  <Typography
-                    variant="buttonLarge"
-                    fontWeight="bold"
-                    textAlign="center"
-                  >
-                    {new Date(item.date).getFullYear().toString()} /
-                    {new Date(item.hours_worked).getMonth() + 1 + ""} /
-                    {new Date(item.hours_worked).getDate().toString()} :{" "}
-                    {Math.floor(item.hours_worked)}
-                  </Typography>
-                </EnterCardInfoWorkHours>
-              ))}
-            </Stack>
-          </CardInfo>
           <CardInfoBase>
             <Stack spacing={1} width="100%">
               <StartCardInfo>
                 <Typography variant="h3" fontWeight="bold">
-                  salary
+                  Feedback
                 </Typography>
               </StartCardInfo>
-              <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-                <Typography variant="h5">
-                  total work hours : {data.total_hours_worked}
+              <TextField
+                label="id"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+              />
+              <TextField
+                label="text"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                multiline
+              />
+              <Button
+                variant="contained"
+                color="success"
+                fullWidth
+                onClick={() => submit()}
+              >
+                submit
+              </Button>
+            </Stack>
+          </CardInfoBase>
+          <CardInfoBase>
+            <Stack spacing={1} width="100%">
+              <StartCardInfo>
+                <Typography variant="h3" fontWeight="bold">
+                  Your messages
                 </Typography>
-                <Typography variant="h5">base salary : {20000}</Typography>
-              </Box>
-              <hr />
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Typography variant="h5">
-                  your salary : {20000 * data.total_hours_worked}
-                </Typography>
-              </Box>
+              </StartCardInfo>
+              <Stack sx={{ maxHeight: "300px", overflow: "auto" }} spacing={1}>
+                {data.feedbacks.map((item) => (
+                  <Box
+                    sx={{
+                      border: "1px solid white",
+                      borderRadius: "8px",
+                      padding: "16px",
+                    }}
+                  >
+                    <Typography
+                      variant="h4"
+                      fontWeight="bold"
+                      color="#ffffff70"
+                    >
+                      From : {item.from}
+                    </Typography>
+                    <Typography variant="buttonLarge" ml={2}>
+                      {item.message}
+                    </Typography>
+                  </Box>
+                ))}
+              </Stack>
             </Stack>
           </CardInfoBase>
         </Stack>
@@ -281,4 +251,4 @@ const UserPage = () => {
   );
 };
 
-export default UserPage;
+export default Messages;

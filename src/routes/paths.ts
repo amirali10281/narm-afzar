@@ -9,4 +9,5 @@ export const PATH_DASHBOARD = {
   login: path(ROOTS_DASHBOARD, "login"),
   splash: path(ROOTS_DASHBOARD, "splash"),
   user: path(ROOTS_DASHBOARD, "user"),
+  messages: path(ROOTS_DASHBOARD, "messages"),
 };

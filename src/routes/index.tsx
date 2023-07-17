@@ -27,6 +27,8 @@ const Login = Loadable(lazy(() => import("../pages/Login")));
 
 const UserPage = Loadable(lazy(() => import("../pages/UserPage")));
 
+const Messages = Loadable(lazy(() => import("../pages/Messages")));
+
 export default function Router() {
   return (
     <Routes>
@@ -54,14 +56,14 @@ export default function Router() {
             </RequireAuth>
           }
         />
-        {/* <Route
-          path={`${PATH_DASHBOARD.chat}`}
+        <Route
+          path={`${PATH_DASHBOARD.messages}`}
           element={
             <RequireAuth>
-              <Chat />
+              <Messages />
             </RequireAuth>
           }
-        /> */}
+        />
       </Route>
     </Routes>
   );
