@@ -8,7 +8,6 @@ interface RequireAuthProps {
 }
 
 export function RequireAuth({ children }: RequireAuthProps) {
-  return children;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,4 +17,5 @@ export function RequireAuth({ children }: RequireAuthProps) {
         navigate(PATH_DASHBOARD.login);
       });
   }, []);
+  return children;
 }

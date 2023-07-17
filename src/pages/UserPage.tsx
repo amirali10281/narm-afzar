@@ -190,7 +190,7 @@ const UserPage = () => {
     <Wrapper>
       <LoginButton
         onClick={() => {
-          navigate(PATH_DASHBOARD.splash);
+          navigate(PATH_DASHBOARD.checkout);
         }}
       >
         logout

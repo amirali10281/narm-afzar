@@ -8,17 +8,17 @@ interface NoAuthProps {
 }
 
 export function NoAuth({ children }: NoAuthProps) {
-  return children;
   const navigate = useNavigate();
 
   useEffect(() => {
     axiosInstance
       .get(`${process.env.REACT_APP_BASE_URL}/user/profile/me`)
       .then(() => {
-        navigate(PATH_DASHBOARD.splash);
+        navigate(PATH_DASHBOARD.checkout);
       })
       .catch((e) => {
         console.log(e);
       });
   }, []);
+  return children;
 }

@@ -35,11 +35,11 @@ export default function Router() {
       <Route>
         <Route
           path={PATH_DASHBOARD.root}
-          element={<Navigate to={PATH_DASHBOARD.splash} />}
+          element={<Navigate to={PATH_DASHBOARD.checkout} />}
         />
       </Route>
       <Route>
-        <Route path={PATH_DASHBOARD.splash} element={<Splash />} />
+        <Route path={PATH_DASHBOARD.checkout} element={<Splash />} />
         <Route
           path={PATH_DASHBOARD.login}
           element={
@@ -62,6 +62,11 @@ export default function Router() {
             <RequireAuth>
               <Messages />
             </RequireAuth>
+          }
+        />
+        <Route
+          element={
+            <Navigate to={PATH_DASHBOARD.checkout} />
           }
         />
       </Route>
