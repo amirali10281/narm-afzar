@@ -82,7 +82,7 @@ const About = () => {
                     </Typography>
                     <Typography variant="body1" ml={2}>
 
-                        On <A href="https://hrm.amirentezari.ir/checkout">hrm.amirentezari.ir/checkout</A> , you can scan your qr code to checkout your enter or exit. On top of the page, you can login to see your information like checkouts, workhours, wage and etc. on hrm.amirentezari.ir/splash, on top of the page, you can send feedback to others and see feedbacks that others sent to you.
+                        On <A href="https://hrm.amirentezari.ir/checkout">hrm.amirentezari.ir/checkout</A> , you can scan your qr code to checkout your enter or exit. On top of the page, you can login to see your information like checkouts, workhours, wage and etc. on hrm.amirentezari.ir/checkout, on top of the page, you can send feedback to others and see feedbacks that others sent to you.
                         In addition, a full admin panel is available on hrm-api.amirentezari.ir/admin that you can do anything you want.
                     </Typography>
                 </CardInfoBase>
